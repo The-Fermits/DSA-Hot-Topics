@@ -1,0 +1,12 @@
+
+int kadane (vi a ){
+    int n = a.size() ; 
+    int max_so_far = -1e9; 
+    int cur_sum = 0; 
+    for (int i=0; i<n; i++){
+     cur_sum = max(a[i],cur_sum+a[i]); 
+     max_so_far = max(max_so_far,cur_sum) ; 
+    }
+
+    return max_so_far ;
+}
