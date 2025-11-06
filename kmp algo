@@ -1,0 +1,36 @@
+
+// returns length of prefix 0,1,2..x  matches with i-x,....,i-1,i (suffix) 
+vector<int> kmp_algo(string s) {
+    int n = s.size();
+    vector<int> kmp(n, 0);
+   int i = 1 , j = 0; 
+   while(i<n) {
+    if(s[i]==s[j]) {
+        kmp[i] = j + 1 ; 
+        i++; 
+        j++;
+    }
+    else {
+    // try with smaller prefix 
+    if(j>0)  j = kmp[j-1] ; // keep i same 
+    else  kmp[i] = 0, i++ ;
+    }
+   }
+    return kmp;
+}
+
+
+void solve()
+{
+   string pattern = "aba" ; 
+   int m = pattern.length() ;
+   string s ; cin >> s ; 
+   // find ct of occurence of pattern in s 
+   string s_new = pattern + '@' + s ;
+   vector<int> kmp = kmp_algo(s_new) ; 
+   // ct freq of m 
+   int ct = 0;
+   for (auto v : kmp) if(v==m) ct++;
+   cout << ct << endl;
+
+}
